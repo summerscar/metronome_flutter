@@ -1,7 +1,11 @@
 name: "pre-release"
 on:
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Manual triggers'
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   release-to-gitHub:

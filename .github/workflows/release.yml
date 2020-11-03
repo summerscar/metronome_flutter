@@ -1,6 +1,10 @@
 name: "release"
 
 on:
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Manual triggers'
   push:
     tags:
       - "v*"
