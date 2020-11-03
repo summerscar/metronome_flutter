@@ -6,7 +6,7 @@ class Summerscar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-        opacity: 1,
+        opacity: 0,
         child: Container(
           padding: EdgeInsets.only(bottom: 10),
           child: RichText(

@@ -1,6 +1,15 @@
-# metronome
+# 节拍器
 
-A new Flutter project.
+![pre-release](https://github.com/summerscar/metronome_flutter/workflows/pre-release/badge.svg?branch=main)
+
+一个简单的节拍器。
+
+[Demo](https://summerscar.me/metronome_flutter/)
+
+[Download](https://github.com/summerscar/metronome_flutter/releases)
+
+
+![preview](/preview/preview.jpg)
 
 ## Getting Started
 
