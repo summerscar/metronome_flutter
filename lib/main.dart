@@ -63,7 +63,11 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   }
 
   void _playAudio () {
-    assetsAudioPlayer.open(Audio('assets/di.mp3'));
+    if (_nowStep % 4 == 0) {
+      assetsAudioPlayer.open(Audio('assets/metronome1.mp3'));
+    } else {
+      assetsAudioPlayer.open(Audio('assets/metronome2.mp3'));
+    }
   }
 
   void runTimer () {
