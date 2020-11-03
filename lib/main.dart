@@ -3,7 +3,7 @@ import './component/slider.dart';
 import './component/indactor.dart';
 import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
-
+import './component/summerscar.dart';
 void main() {
   runApp(MyApp());
 }
@@ -95,14 +95,16 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            Container(),
             Text(
               '节拍器',
               style: Theme.of(context).textTheme.headline3,
             ),
             SliderRow(_bmp, _setBmpHanlder, _isRunning, _toggleIsRunning, _animationController),
-            IndactorRow(_nowStep)
+            IndactorRow(_nowStep),
+            Summerscar(),
           ],
         ),
       )// This trailing comma makes auto-formatting nicer for build methods.

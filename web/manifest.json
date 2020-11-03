@@ -1,6 +1,6 @@
 {
-    "name": "metronome",
-    "short_name": "metronome",
+    "name": "节拍器",
+    "short_name": "节拍器",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
