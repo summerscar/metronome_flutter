@@ -35,16 +35,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  int _bmp = 70;
+  int _bpm = 70;
   int _nowStep = -1;
   bool _isRunning = false;
   Timer timer;
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
   AnimationController _animationController;
 
-  void _setBmpHanlder(int val) {
+  void _setBpmHanlder(int val) {
     setState(() {
-      _bmp = val;
+      _bpm = val;
     });
   }
 
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void runTimer() {
-    timer = Timer(Duration(milliseconds: (60 / _bmp * 1000).toInt()), () {
+    timer = Timer(Duration(milliseconds: (60 / _bpm * 1000).toInt()), () {
       _playAudio().then((value) => _setNowStep());
       runTimer();
     });
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage>
             '节拍器',
             style: Theme.of(context).textTheme.headline3,
           ),
-          SliderRow(_bmp, _setBmpHanlder, _isRunning, _toggleIsRunning,
+          SliderRow(_bpm, _setBpmHanlder, _isRunning, _toggleIsRunning,
               _animationController),
           IndactorRow(_nowStep),
           Summerscar(),

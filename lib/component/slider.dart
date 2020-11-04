@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class SliderRow extends StatelessWidget {
-  final int bmp;
-  final Function setBmpHandler;
+  final int bpm;
+  final Function setBpmHandler;
   final bool isRunning;
   final Function toggleRunning;
   final AnimationController _animationController;
 
-  SliderRow(this.bmp, this.setBmpHandler, this.isRunning, this.toggleRunning, this._animationController);
+  SliderRow(this.bpm, this.setBpmHandler, this.isRunning, this.toggleRunning, this._animationController);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class SliderRow extends StatelessWidget {
             SleekCircularSlider(
               min: 30,
               max: 200,
-              initialValue: this.bmp.toDouble(),
+              initialValue: this.bpm.toDouble(),
               appearance: CircularSliderAppearance(
                 size: 270,
                 infoProperties: InfoProperties(
@@ -32,7 +32,7 @@ class SliderRow extends StatelessWidget {
                 )
               ),
               onChange: (double value) {
-                setBmpHandler(value.toInt());
+                setBpmHandler(value.toInt());
             }),
           ],
         ),
