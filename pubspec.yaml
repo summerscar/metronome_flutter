@@ -31,6 +31,8 @@ dependencies:
   sleek_circular_slider: 1.2.0+web
   assets_audio_player: 2.0.12
   url_launcher: 5.7.8
+  wakelock: 0.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

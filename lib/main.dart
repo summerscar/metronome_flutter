@@ -4,6 +4,7 @@ import './component/indactor.dart';
 import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import './component/summerscar.dart';
+import 'package:wakelock/wakelock.dart';
 
 void main() {
   runApp(MyApp());
@@ -69,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage>
   Future<void> _playAudio() {
     int nextStep = _nowStep + 1;
     if (nextStep % 4 == 0) {
-      print('first');
       return assetsAudioPlayer.open(Audio('assets/metronome1.mp3'));
     } else {
       return assetsAudioPlayer.open(Audio('assets/metronome2.mp3'));
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    // runTimer();
+    Wakelock.enable();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
   }
