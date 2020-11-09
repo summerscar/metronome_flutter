@@ -5,6 +5,9 @@ import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import './component/summerscar.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:flutter/foundation.dart';
+import './component/setting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
   Timer timer;
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
   AnimationController _animationController;
+  int soundType = 0;
 
   void _setBpmHanlder(int val) {
     setState(() {
@@ -70,9 +74,9 @@ class _MyHomePageState extends State<MyHomePage>
   Future<void> _playAudio() {
     int nextStep = _nowStep + 1;
     if (nextStep % 4 == 0) {
-      return assetsAudioPlayer.open(Audio('assets/metronome1.mp3'));
+      return assetsAudioPlayer.open(Audio('assets/metronome$soundType-1.mp3'));
     } else {
-      return assetsAudioPlayer.open(Audio('assets/metronome2.mp3'));
+      return assetsAudioPlayer.open(Audio('assets/metronome$soundType-2.mp3'));
     }
   }
 
@@ -83,10 +87,32 @@ class _MyHomePageState extends State<MyHomePage>
     });
   }
 
+  Future setBpm () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int bpm = prefs.getInt('bpm');
+    if (bpm != null) {
+      print('get bpm $bpm');
+      _setBpmHanlder(bpm);
+    }
+  }
+
+  Future setSoundType () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int soundType = prefs.getInt('sound');
+    if (soundType != null) {
+      print('get sound type $soundType');
+      this.soundType = soundType;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    Wakelock.enable();
+    if (!kIsWeb) {
+      Wakelock.enable();
+    }
+    setSoundType();
+    setBpm();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
   }
@@ -104,7 +130,23 @@ class _MyHomePageState extends State<MyHomePage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  color: Theme.of(context).textTheme.headline3.color,
+                  onPressed: () async {
+                    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Setting()));
+                    print('setting result: $result');
+                    setSoundType();
+                  },
+                )
+              ],
+            )
+          ),
           Text(
             '节拍器',
             style: Theme.of(context).textTheme.headline3,

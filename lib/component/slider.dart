@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SliderRow extends StatelessWidget {
   final int bpm;
@@ -33,6 +34,7 @@ class SliderRow extends StatelessWidget {
               ),
               onChange: (double value) {
                 setBpmHandler(value.toInt());
+                _storeBpm(value.toInt());
             }),
           ],
         ),
@@ -47,4 +49,10 @@ class SliderRow extends StatelessWidget {
       ]
     );
   }
+}
+
+_storeBpm(int bpm) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  // print('_setSoundType: $soundtype');
+  await prefs.setInt('bpm', bpm);
 }
