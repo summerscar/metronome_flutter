@@ -38,8 +38,12 @@ class Setting extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
-                onTap: () {
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('还没做呢……')));
+                onTap: () async {
+                  // Scaffold.of(context).showSnackBar(SnackBar(content: Text('还没做呢……')));
+                  final res = await changeSteps(context);
+                  if (res != null) {
+                    _setSteps(res);
+                  }
                 },
               )
             )
@@ -83,8 +87,38 @@ Future<int> changeSound(context) async {
   return i;
 }
 
+Future<int> changeSteps(context) async {
+  int i = await showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text('请选择节拍'),
+          children:
+            List(8).asMap()
+            .entries
+            .map((entry) => SimpleDialogOption(
+              onPressed: () {
+                // 返回1
+                Navigator.pop(context, (entry.key + 1));
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 6),
+                child: Text((entry.key + 1).toString())
+              ),
+            )).toList()
+          );
+      });
+  return i;
+}
+
 _setSoundType(int soundtype) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   // print('_setSoundType: $soundtype');
   await prefs.setInt('sound', soundtype);
+}
+
+_setSteps(int steps) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  print('_setSteps: $steps');
+  await prefs.setInt('steps', steps);
 }

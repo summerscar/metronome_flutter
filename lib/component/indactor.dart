@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class IndactorRow extends StatelessWidget {
   final int nowStep;
-  final List steps = List(4);
-  IndactorRow(this.nowStep);
+  final int steps;
+  IndactorRow(this.nowStep, this.steps);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: steps
+    return Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: List(steps)
             .asMap()
             .entries
             .map((entry) => Container(
@@ -19,7 +20,7 @@ class IndactorRow extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: this.nowStep > -1 &&
-                            (this.nowStep % steps.length) == entry.key
+                            (this.nowStep % steps) == entry.key
                         ? Color.fromARGB(255, 102, 204, 255)
                         : Colors.grey[300])))
             .toList());

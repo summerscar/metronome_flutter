@@ -39,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   int _bpm = 70;
+  int _steps = 4;
   int _nowStep = -1;
   bool _isRunning = false;
   Timer timer;
@@ -49,6 +50,12 @@ class _MyHomePageState extends State<MyHomePage>
   void _setBpmHanlder(int val) {
     setState(() {
       _bpm = val;
+    });
+  }
+
+  void _setSteps (int val) {
+    setState(() {
+      _steps = val;
     });
   }
 
@@ -73,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   Future<void> _playAudio() {
     int nextStep = _nowStep + 1;
-    if (nextStep % 4 == 0) {
+    if (nextStep % _steps == 0) {
       return assetsAudioPlayer.open(Audio('assets/metronome$soundType-1.mp3'));
     } else {
       return assetsAudioPlayer.open(Audio('assets/metronome$soundType-2.mp3'));
@@ -82,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   void runTimer() {
     timer = Timer(Duration(milliseconds: (60 / _bpm * 1000).toInt()), () {
+      // todo: 部分拍号不需要 执行playaudio
       _playAudio().then((value) => _setNowStep());
       runTimer();
     });
@@ -105,6 +113,15 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
+  Future setSteps () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int steps = prefs.getInt('steps');
+    if (steps != null) {
+      print('get steps $steps');
+      _setSteps(steps);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -112,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage>
       Wakelock.enable();
     }
     setSoundType();
+    setSteps();
     setBpm();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
@@ -142,6 +160,7 @@ class _MyHomePageState extends State<MyHomePage>
                     final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Setting()));
                     print('setting result: $result');
                     setSoundType();
+                    setSteps();
                   },
                 )
               ],
@@ -153,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage>
           ),
           SliderRow(_bpm, _setBpmHanlder, _isRunning, _toggleIsRunning,
               _animationController),
-          IndactorRow(_nowStep),
+          IndactorRow(_nowStep, _steps),
           Summerscar(),
         ],
       ),
