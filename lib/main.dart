@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
