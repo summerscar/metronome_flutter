@@ -13,9 +13,7 @@ class Summerscar extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  style: TextStyle(
-                    color: Colors.grey[400]
-                  ),
+                  style: TextStyle(color: Colors.grey[400]),
                   text: 'by ',
                 ),
                 TextSpan(

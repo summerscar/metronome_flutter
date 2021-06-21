@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class IndactorRow extends StatelessWidget {
   final int nowStep;
-  final List steps = List(4);
+  final List steps = List.filled(4, null);
   IndactorRow(this.nowStep);
 
   @override

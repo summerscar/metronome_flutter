@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage>
     });
   }
 
-  Future setBpm () async {
+  Future setBpm() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int bpm = prefs.getInt('bpm');
     if (bpm != null) {
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
-  Future setSoundType () async {
+  Future setSoundType() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int soundType = prefs.getInt('sound');
     if (soundType != null) {
@@ -131,22 +131,22 @@ class _MyHomePageState extends State<MyHomePage>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.settings),
-                  color: Theme.of(context).textTheme.headline3.color,
-                  onPressed: () async {
-                    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Setting()));
-                    print('setting result: $result');
-                    setSoundType();
-                  },
-                )
-              ],
-            )
-          ),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.settings),
+                    color: Theme.of(context).textTheme.headline3.color,
+                    onPressed: () async {
+                      final result = await Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Setting()));
+                      print('setting result: $result');
+                      setSoundType();
+                    },
+                  )
+                ],
+              )),
           Text(
             '节拍器',
             style: Theme.of(context).textTheme.headline3,

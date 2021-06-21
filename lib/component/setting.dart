@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('设置')
-      ),
+      appBar: AppBar(title: Text('设置')),
       body: Container(
         child: Column(
           children: [
@@ -29,20 +26,21 @@ class Setting extends StatelessWidget {
               },
             ),
             Builder(
-              builder: (context) => InkWell(
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                  child: Text(
-                    '节拍',
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                ),
-                onTap: () {
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('还没做呢……')));
-                },
-              )
-            )
+                builder: (context) => InkWell(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                        child: Text(
+                          '节拍',
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                      ),
+                      onTap: () {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text('还没做呢……')));
+                      },
+                    ))
           ],
         ),
       ),
