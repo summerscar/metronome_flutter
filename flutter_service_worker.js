@@ -3,25 +3,25 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "favicon.png": "5dcef449791fa27946b3d35ad8803796",
+  "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
+"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
+"version.json": "d47cd35d5d2714412338b2baa1b1db64",
+"manifest.json": "d68628558033b6f743f13ba3d26ed4b2",
+"assets/AssetManifest.json": "d331bd1e62cb9c26e9ed497b7cd2b2a4",
+"assets/packages/wakelock_web/assets/no_sleep.js": "7748a45cd593f33280669b29c2c8919a",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/assets/metronome1-1.mp3": "0fa85f4e157e8dee340884ab5db0d7b1",
 "assets/assets/metronome0-1.mp3": "db02633163a293b62933d8dd9e8ae8ab",
-"assets/assets/di.mp3": "6626df16db9cbb84ee9c07ae1932a207",
-"assets/assets/metronome0-2.mp3": "7244b13dc7ebbd054f2ceb38988466f7",
 "assets/assets/metronome1-2.mp3": "521ef2f1af1efa707fbaed94f7eb5ff6",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/NOTICES": "3fb4badc710d93b2059f0d57dbe56a2d",
+"assets/assets/metronome0-2.mp3": "7244b13dc7ebbd054f2ceb38988466f7",
+"assets/assets/di.mp3": "6626df16db9cbb84ee9c07ae1932a207",
+"assets/NOTICES": "a560e206c2523e2c00b4555dfa0f5d65",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/packages/wakelock_web/assets/no_sleep.js": "7748a45cd593f33280669b29c2c8919a",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
-"assets/AssetManifest.json": "333e3ac7bd12568b62033393e2dab5f1",
-"manifest.json": "d68628558033b6f743f13ba3d26ed4b2",
-"main.dart.js": "31f6913330d51ca5e09b2e6998cc293d",
-"version.json": "d47cd35d5d2714412338b2baa1b1db64",
-"index.html": "cde8d1e9deb5f2565fbe33642b2c71a1",
-"/": "cde8d1e9deb5f2565fbe33642b2c71a1",
-"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1"
+"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"main.dart.js": "468554ac1067c71da4ba035a9011ea88",
+"index.html": "5d4e9d98f899f8523a8a53fc308e3a70",
+"/": "5d4e9d98f899f8523a8a53fc308e3a70"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -39,7 +39,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
@@ -165,7 +165,7 @@ async function downloadOffline() {
     }
     currentContent[key] = true;
   }
-  for (var resourceKey in Object.keys(RESOURCES)) {
+  for (var resourceKey of Object.keys(RESOURCES)) {
     if (!currentContent[resourceKey]) {
       resources.push(resourceKey);
     }
