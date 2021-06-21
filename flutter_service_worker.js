@@ -16,12 +16,12 @@ const RESOURCES = {
 "assets/assets/metronome1-2.mp3": "521ef2f1af1efa707fbaed94f7eb5ff6",
 "assets/assets/metronome0-2.mp3": "7244b13dc7ebbd054f2ceb38988466f7",
 "assets/assets/di.mp3": "6626df16db9cbb84ee9c07ae1932a207",
-"assets/NOTICES": "a560e206c2523e2c00b4555dfa0f5d65",
+"assets/NOTICES": "99e5f90e964b101200f9a765bfe347dd",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "main.dart.js": "468554ac1067c71da4ba035a9011ea88",
-"index.html": "30baa5a1f39db33bb6a477dc6cd5d89a",
-"/": "30baa5a1f39db33bb6a477dc6cd5d89a"
+"index.html": "5135ab3b1bb194121bb4ba7fcffdc8b4",
+"/": "5135ab3b1bb194121bb4ba7fcffdc8b4"
 };
 
 // The application shell files that are downloaded before a service worker can
